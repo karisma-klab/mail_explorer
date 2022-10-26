@@ -36,7 +36,6 @@ def summarize_message(mail):
     
 if __name__ == "__main__":
     start_time = time.time()
-    print("--- %s seconds ---" % (time.time() - start_time))
     zip_files_list = os.listdir(ZIP_FILES_PATH)
     for zip_filename in zip_files_list:
         print(zip_filename)
