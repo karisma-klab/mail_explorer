@@ -3,6 +3,8 @@
 from email import message_from_binary_file
 from email import policy
 from optparse import OptionParser
+from numpy import array_split
+from threading import Thread
 import os
 import time
 import zipfile
@@ -43,32 +45,50 @@ def run_on_file(filename, src_dir):
             print(summarized_message)
             
 
-def run():
+def main(src_dir, dst_dir, threads_num):
     start_time = time.time()
-    zip_files_list = os.listdir(ZIP_FILES_PATH)
+    zip_files_list = os.listdir(src_dir)
+    # create array of threads with splited zip files lists according to threads num
+    threads = [Thread(target=summarize_zip_files_list, 
+                      args=(file_list, src_dir, dst_dir)) for file_list in array_split(zip_files_list, threads_num)]
+    # start threads
+    print("starting {} threads.".format(len(threads)))
+    for thread in threads:
+        print("start_thread")
+        thread.start()
+    # join threads
+    for thread in threads:
+        print("join thread")
+        thread.join()
+    print("--- %s seconds ---" % (time.time() - start_time))
+    
+    
+def summarize_zip_files_list(zip_files_list, src_dir, dst_dir):
     for zip_filename in zip_files_list:
-        print(zip_filename)
+        # print(zip_filename)
         zip_dir = zip_filename[:-4]
-        os.mkdir(os.path.join(TARGET_DIR, zip_dir))
-        with zipfile.ZipFile(os.path.join(ZIP_FILES_PATH, zip_filename)) as zip_file:
+        os.mkdir(os.path.join(dst_dir, zip_dir))
+        with zipfile.ZipFile(os.path.join(src_dir, zip_filename)) as zip_file:
             for eml_file in zip_file.namelist()[1:]:
-                print(eml_file)
+                # print(eml_file)
                 with zip_file.open(eml_file) as mail:
                     summarized_message = summarize_message(mail)
-                summarized_file = os.path.join(TARGET_DIR, eml_file[:-4])
+                summarized_file = os.path.join(dst_dir, eml_file[:-4])
                 with open(summarized_file, 'w') as sm:
                     sm.write(summarized_message)
-    print("--- %s seconds ---" % (time.time() - start_time))
+    print("bye!")
 
-    
-    
 if __name__ == "__main__":
     parser = OptionParser()
     parser.add_option("-f", "--file", dest="filename", 
                       help="Run test on this file", metavar="FILE")
-    parser.add_option("-s", "--src-dir", dest="src_dir", 
+    parser.add_option("-s", dest="src_dir", 
                       help="source directory", metavar="DIR", default=ZIP_FILES_PATH)
-    parser.add_option("-q", "--quiet", action="store_false", dest="verbose", 
+    parser.add_option("-d", dest="dst_dir", 
+                      help="destination directory", metavar="DIR", default=TARGET_DIR)
+    parser.add_option("-t", dest="threads_num", 
+                      help="threads number", type="int", metavar="NUM", default=1)
+    parser.add_option("-q", action="store_false", dest="verbose", 
                       default=True, help="don't print status messages to stdout")
     (options, args) = parser.parse_args()
     if not os.path.isdir(options.src_dir):
@@ -77,7 +97,7 @@ if __name__ == "__main__":
     if options.filename is not None:
         run_on_file(options.filename, options.src_dir)
     else:
-        run()
+        main(options.src_dir, options.dst_dir, options.threads_num)
     
     
 
