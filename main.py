@@ -3,8 +3,8 @@
 from email import message_from_binary_file
 from email import policy
 from optparse import OptionParser
+from multiprocessing import Process
 from numpy import array_split
-from threading import Thread
 import os
 import time
 import zipfile
@@ -43,26 +43,8 @@ def run_on_file(filename, src_dir):
         with zip_file.open(filename) as mail:
             summarized_message = summarize_message(mail)
             print(summarized_message)
-            
 
-def main(src_dir, dst_dir, threads_num):
-    start_time = time.time()
-    zip_files_list = os.listdir(src_dir)
-    # create array of threads with splited zip files lists according to threads num
-    threads = [Thread(target=summarize_zip_files_list, 
-                      args=(file_list, src_dir, dst_dir)) for file_list in array_split(zip_files_list, threads_num)]
-    # start threads
-    print("starting {} threads.".format(len(threads)))
-    for thread in threads:
-        print("start_thread")
-        thread.start()
-    # join threads
-    for thread in threads:
-        print("join thread")
-        thread.join()
-    print("--- %s seconds ---" % (time.time() - start_time))
-    
-    
+            
 def summarize_zip_files_list(zip_files_list, src_dir, dst_dir):
     for zip_filename in zip_files_list:
         # print(zip_filename)
@@ -77,11 +59,33 @@ def summarize_zip_files_list(zip_files_list, src_dir, dst_dir):
                 with open(summarized_file, 'w') as sm:
                     sm.write(summarized_message)
     print("bye!")
+    
+
+def main(src_dir, dst_dir, threads_num):
+    start_time = time.time()
+    zip_files_list = os.listdir(src_dir)
+    # create array of threads with splited zip files lists according to threads num
+    threads = [Process(target=summarize_zip_files_list, 
+                      args=(file_list, src_dir, dst_dir)) for file_list in array_split(zip_files_list, threads_num)]
+    # start threads
+    print("starting {} threads.".format(len(threads)))
+    for thread in threads:
+        print("start_thread")
+        thread.start()
+    # join threads
+    for thread in threads:
+        print("join thread")
+        thread.join()
+    print("--- %s seconds ---" % (time.time() - start_time))
+    
+    
 
 if __name__ == "__main__":
     parser = OptionParser()
     parser.add_option("-f", "--file", dest="filename", 
-                      help="Run test on this file", metavar="FILE")
+                      help="Run test on this eml file", metavar="FILE")
+    parser.add_option("-z", "--zip", dest="zip_filename", 
+                      help="Run test on this zip file", metavar="FILE")
     parser.add_option("-s", dest="src_dir", 
                       help="source directory", metavar="DIR", default=ZIP_FILES_PATH)
     parser.add_option("-d", dest="dst_dir", 
@@ -91,11 +95,16 @@ if __name__ == "__main__":
     parser.add_option("-q", action="store_false", dest="verbose", 
                       default=True, help="don't print status messages to stdout")
     (options, args) = parser.parse_args()
+    
     if not os.path.isdir(options.src_dir):
         print("error: specify a valid soruce directory (where ZIP files are) using the -s option")
         exit(0)
     if options.filename is not None:
         run_on_file(options.filename, options.src_dir)
+    elif options.zip_filename is not None:
+        start_time = time.time()
+        summarize_zip_files_list([options.zip_filename], options.src_dir, options.dst_dir)
+        print("--- %s seconds ---" % (time.time() - start_time))
     else:
         main(options.src_dir, options.dst_dir, options.threads_num)
     
