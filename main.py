@@ -3,7 +3,7 @@
 from email import message_from_binary_file
 from email import policy
 from optparse import OptionParser
-from multiprocessing import Pool
+from multiprocessing import Pool, Value
 import os
 import time
 import zipfile
@@ -11,6 +11,38 @@ import zipfile
 ZIP_FILES_PATH="../sample/"
 TARGET_DIR="summarized/"
 
+counter = None
+total_zip_files = None
+
+def init(args, args2):
+    ''' store the counter for later use '''
+    global counter
+    global total_zip_files
+    counter = args
+    total_zip_files = args2
+    
+
+def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        length      - Optional  : character length of bar (Int)
+        fill        - Optional  : bar fill character (Str)
+        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% ({iteration}/{total}) {suffix}', end = printEnd)
+    # Print New Line on Complete
+    if iteration == total: 
+        print()
+    
 
 def summarize_message(mail):
     """
@@ -58,7 +90,9 @@ def summarize_eml_file(filename, src_dir):
             
 
 def summarize_zip_file(zip_filename, src_dir, dst_dir):
-    print("Summarizing {}...".format(zip_filename))
+    global counter
+    global zip_files_list
+    # print("Summarizing {}...".format(zip_filename))
     zip_dir = zip_filename[:-4]
     os.mkdir(os.path.join(dst_dir, zip_dir))
     with zipfile.ZipFile(os.path.join(src_dir, zip_filename)) as zip_file:
@@ -69,36 +103,30 @@ def summarize_zip_file(zip_filename, src_dir, dst_dir):
                 summarized_file = os.path.join(dst_dir, eml_file[:-4])
                 with open(summarized_file, 'w') as sm:
                     sm.write(summarized_message)
-                    
-                    
-def summarize_zip_files_list(zip_files_list, src_dir, dst_dir):
-    for zip_filename in zip_files_list:
-        # print(zip_filename)
-        zip_dir = zip_filename[:-4]
-        os.mkdir(os.path.join(dst_dir, zip_dir))
-        with zipfile.ZipFile(os.path.join(src_dir, zip_filename)) as zip_file:
-            for eml_file in zip_file.namelist()[1:]:
-                # print(eml_file)
-                with zip_file.open(eml_file) as mail:
-                    summarized_message = summarize_message(mail)
-                summarized_file = os.path.join(dst_dir, eml_file[:-4])
-                with open(summarized_file, 'w') as sm:
-                    sm.write(summarized_message)
-    print("bye!")
+    with counter.get_lock():
+        counter.value += 1
+        printProgressBar(counter.value, total_zip_files.value, prefix = 'Progress:', suffix = 'Complete', length = 50)
+
+    
+def summarize_zip_files_list(zip_files_list, src_dir, dst_dir, threads_num):
+    total_zip_files = Value('i', len(zip_files_list))
+    counter = Value('i', 0)
+    
+    printProgressBar(0, total_zip_files.value, prefix = 'Progress:', suffix = 'Complete', length = 50)
+    with Pool(processes=threads_num, initializer=init, initargs=(counter,total_zip_files)) as pool:
+        pool.starmap(
+            summarize_zip_file, 
+            [(zip_filename, src_dir, dst_dir) for zip_filename in zip_files_list]
+            )
     
 
 def main(src_dir, dst_dir, threads_num):
     start_time = time.time()
     zip_files_list = os.listdir(src_dir)
-    with Pool(processes=threads_num) as pool:
-        pool.starmap(
-            summarize_zip_file, 
-            [(zip_filename, src_dir, dst_dir) for zip_filename in zip_files_list]
-            )
+    summarize_zip_files_list(zip_files_list, src_dir, dst_dir, threads_num)
     print("--- %s seconds ---" % (time.time() - start_time))
     
     
-
 if __name__ == "__main__":
     parser = OptionParser()
     parser.add_option(
