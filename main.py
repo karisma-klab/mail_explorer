@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
+from ctypes import c_char
 from email import message_from_binary_file
 from email import policy
 from optparse import OptionParser
-from multiprocessing import Pool, Value
+from multiprocessing import Pool, Value, Array
+from shutil import rmtree
 import os
 import time
 import zipfile
@@ -13,13 +15,16 @@ TARGET_DIR="summarized/"
 
 counter = None
 total_zip_files = None
+session_file = None
 
-def init(args, args2):
+def init(args, args2, args3):
     ''' store the counter for later use '''
     global counter
     global total_zip_files
+    global session_file
     counter = args
     total_zip_files = args2
+    session_file = args3
     
 
 def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
@@ -42,6 +47,20 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
     # Print New Line on Complete
     if iteration == total: 
         print()
+        
+
+def restore_session(src_dir, dst_dir):
+    session = None
+    # get zip file completly summarized
+    with open('session') as f:
+        session = f.read().splitlines()
+    # Find directories which are not a complete zip file summarized
+    left_over_dirs = [directory for directory in os.listdir(dst_dir) if directory + '.zip' not in session]
+    # delete found directories with not a complete zip file summarized
+    for directory in left_over_dirs:
+        rmtree(os.path.join(dst_dir, directory))
+    # return all files in src_dir but the ones in session
+    return [zip_file for zip_file in os.listdir(src_dir) if zip_file not in session]
     
 
 def summarize_message(mail):
@@ -92,6 +111,7 @@ def summarize_eml_file(filename, src_dir):
 def summarize_zip_file(zip_filename, src_dir, dst_dir):
     global counter
     global zip_files_list
+    global session_file
     # print("Summarizing {}...".format(zip_filename))
     zip_dir = zip_filename[:-4]
     os.mkdir(os.path.join(dst_dir, zip_dir))
@@ -106,14 +126,16 @@ def summarize_zip_file(zip_filename, src_dir, dst_dir):
     with counter.get_lock():
         counter.value += 1
         printProgressBar(counter.value, total_zip_files.value, prefix = 'Progress:', suffix = 'Complete', length = 50)
+        with open(session_file.value, 'a') as session:
+            session.write(zip_filename + '\n')
 
     
 def summarize_zip_files_list(zip_files_list, src_dir, dst_dir, threads_num):
-    total_zip_files = Value('i', len(zip_files_list))
-    counter = Value('i', 0)
-    
-    printProgressBar(0, total_zip_files.value, prefix = 'Progress:', suffix = 'Complete', length = 50)
-    with Pool(processes=threads_num, initializer=init, initargs=(counter,total_zip_files)) as pool:
+    total_zip_files = Value('i', len(os.listdir(src_dir)))
+    counter = Value('i', total_zip_files.value - len(zip_files_list))
+    session_file = Array(c_char, b'session')
+    printProgressBar(counter.value, total_zip_files.value, prefix = 'Progress:', suffix = 'Complete', length = 50)
+    with Pool(processes=threads_num, initializer=init, initargs=(counter,total_zip_files,session_file)) as pool:
         pool.starmap(
             summarize_zip_file, 
             [(zip_filename, src_dir, dst_dir) for zip_filename in zip_files_list]
@@ -122,7 +144,12 @@ def summarize_zip_files_list(zip_files_list, src_dir, dst_dir, threads_num):
 
 def main(src_dir, dst_dir, threads_num):
     start_time = time.time()
-    zip_files_list = os.listdir(src_dir)
+    if os.path.isfile('session'):
+        zip_files_list = restore_session(src_dir, dst_dir)
+    else:
+        with open('session', 'w'):
+            print("creating new session file: session")
+        zip_files_list = os.listdir(src_dir)
     summarize_zip_files_list(zip_files_list, src_dir, dst_dir, threads_num)
     print("--- %s seconds ---" % (time.time() - start_time))
     
