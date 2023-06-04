@@ -5,7 +5,6 @@ import os
 import re
 import sys
 import subprocess
-import time
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLineEdit, QTableWidget, QTableWidgetItem, QTextEdit, QSplitter, QDialog, QLabel, QPlainTextDocumentLayout, QFileDialog
 from PyQt5.QtCore import Qt, QProcess
 from PyQt5.QtGui import QTextCursor, QTextCharFormat, QTextDocument, QColor
@@ -210,8 +209,8 @@ class InitDialog(QDialog):
         global SEARCHES_DIR
 
         # show window
+        self.grab()
         self.show()
-        time.sleep(1)
 
         # check if summarized and searches are on the data_dir
         dirs_in_data_dir =  os.listdir(data_dir)
