@@ -6,7 +6,7 @@ import re
 import sys
 import subprocess
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLineEdit, QTableWidget, QTableWidgetItem, QTextEdit, QSplitter, QDialog, QLabel, QPlainTextDocumentLayout, QFileDialog
-from PyQt5.QtCore import Qt, QProcess, QTimer
+from PyQt5.QtCore import Qt, QProcess
 from PyQt5.QtGui import QTextCursor, QTextCharFormat, QTextDocument, QColor
 
 SUMMARIZED_DIR = None
@@ -201,16 +201,18 @@ class InitDialog(QDialog):
         layout.addWidget(self.message_label)
 
         self.setLayout(layout)
-        self.init_dialog(data_dir)
+        self.init_dialog()
+        self.do_conf(data_dir)
 
-    def init_dialog(self, data_dir):
+    def init_dialog(self):
+        # show window
+        self.grab()
+        self.show()
+
+    def do_conf(self, data_dir):
         global SUMMARIZED_DIR
         global SUMMARIZED_NUM_FILES
         global SEARCHES_DIR
-
-        # show window
-        self.grab()
-        QTimer.singleShot(10, self.show)
 
         # check if summarized and searches are on the data_dir
         dirs_in_data_dir =  os.listdir(data_dir)
