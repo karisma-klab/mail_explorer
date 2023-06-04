@@ -195,7 +195,7 @@ class InitDialog(QDialog):
 
         self.setWindowTitle("Configuring...")
 
-        self.message_label = QLabel("Configuring the system... Don't close this window")
+        self.message_label = QLabel()
 
         layout = QVBoxLayout()
         layout.addWidget(self.message_label)
@@ -208,6 +208,7 @@ class InitDialog(QDialog):
         # show window
         self.grab()
         self.show()
+        self.message_label.setText("Configuring the system... Don't close this window")
 
     def do_conf(self, data_dir):
         global SUMMARIZED_DIR
