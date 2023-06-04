@@ -210,7 +210,7 @@ class InitDialog(QDialog):
         dirs_in_data_dir =  os.listdir(data_dir)
         if 'summarized' in dirs_in_data_dir:
             SUMMARIZED_DIR = os.path.join(data_dir, 'summarized')
-            SUMMARIZED_NUM_FILES = sum([len(files) for r, d, files in os.walk("summarized")])
+            SUMMARIZED_NUM_FILES = sum([len(files) for r, d, files in os.walk(SUMMARIZED_DIR)])
         else:
             self.message_label.setText("ERROR: 'summarized' folder not found")
             return None
