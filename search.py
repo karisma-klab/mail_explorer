@@ -193,10 +193,6 @@ class InitDialog(QDialog):
     def __init__(self, data_dir):
         super().__init__()
 
-        global SUMMARIZED_DIR
-        global SUMMARIZED_NUM_FILES
-        global SEARCHES_DIR
-
         self.setWindowTitle("Configuring...")
 
         self.message_label = QLabel("Configuring the system... Don't close this window")
@@ -205,6 +201,15 @@ class InitDialog(QDialog):
         layout.addWidget(self.message_label)
 
         self.setLayout(layout)
+        self.init_dialog(data_dir)
+
+    def init_dialog(self, data_dir):
+        global SUMMARIZED_DIR
+        global SUMMARIZED_NUM_FILES
+        global SEARCHES_DIR
+
+        # show window
+        self.show()
 
         # check if summarized and searches are on the data_dir
         dirs_in_data_dir =  os.listdir(data_dir)
