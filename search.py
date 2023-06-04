@@ -167,7 +167,6 @@ class ResultDialog(QDialog):
         cursor.setPosition(0)
 
         highlighter = QTextDocument(self)
-        self.search_button.setText ('Running... 0%')
         highlighter.setPlainText(self.search_result_text.toPlainText())
 
         highlight_cursor = QTextCursor(highlighter)
