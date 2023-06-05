@@ -196,6 +196,7 @@ class InitDialog(QDialog):
         self.setWindowTitle("Configuring...")
 
         self.message_label = QLabel()
+        self.message_label.setText("Configuring the system... Don't close this window")
 
         layout = QVBoxLayout()
         layout.addWidget(self.message_label)
