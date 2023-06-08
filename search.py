@@ -69,14 +69,15 @@ class SearchApp(QMainWindow):
 
         # Replace spaces in the search term with underscores for the output file name
         output_file = search_term.replace(" ", "_") + ".txt"
-        output_file_fullpath = os.path.join(SEARCHES_DIR, output_file)
+        output_file_fullpath = os.path.join(SEARCHES_DIR, output_file).replace(' ','\ ')
+        summarized_dir = SUMMARIZED_DIR.replace(' ','\ ')
 
         # Make search_term spanish accent spanish_friendly
         spanish_friendly_str = spanish_friendly(search_term)
 
         # Construct the search command
         # command = f'time find summarized/ -type f -print0 | pv -0 -s 3330608 | xargs -0 -P 5 grep -R -i -m 1 "{search_term}" > searches/{output_file}'
-        command = f'find {SUMMARIZED_DIR} -type f -print0 | pv -0 -n -s {SUMMARIZED_NUM_FILES} | xargs -0 -P 5 grep -R -i -m 1 "{spanish_friendly_str}" > {output_file_fullpath}'
+        command = f'find {summarized_dir} -type f -print0 | pv -0 -n -s {SUMMARIZED_NUM_FILES} | xargs -0 -P 5 grep -R -i -m 1 "{spanish_friendly_str}" > {output_file_fullpath}'
 
         process = QProcess()
         process.readyReadStandardError.connect(lambda: self.update_search_status(process))
@@ -219,14 +220,14 @@ class InitDialog(QDialog):
         # check if summarized and searches are on the data_dir
         dirs_in_data_dir =  os.listdir(data_dir)
         if 'summarized' in dirs_in_data_dir:
-            SUMMARIZED_DIR = os.path.join(data_dir, 'summarized').replace(' ','\ ')
+            SUMMARIZED_DIR = os.path.join(data_dir, 'summarized')
             SUMMARIZED_NUM_FILES = sum([len(files) for r, d, files in os.walk(SUMMARIZED_DIR)])
         else:
             self.message_label.setText("ERROR: 'summarized' folder not found")
             return None
 
         # setup SEARCHES_DIR
-        SEARCHES_DIR = os.path.join(data_dir, 'searches').replace(' ','\ ')
+        SEARCHES_DIR = os.path.join(data_dir, 'searches')
         if 'searches' not in dirs_in_data_dir:
             os.mkdir(SEARCHES_DIR)
 
