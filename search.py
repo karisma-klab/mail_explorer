@@ -219,14 +219,14 @@ class InitDialog(QDialog):
         # check if summarized and searches are on the data_dir
         dirs_in_data_dir =  os.listdir(data_dir)
         if 'summarized' in dirs_in_data_dir:
-            SUMMARIZED_DIR = os.path.join(data_dir, 'summarized')
+            SUMMARIZED_DIR = os.path.join(data_dir, 'summarized').replace(' ','\ ')
             SUMMARIZED_NUM_FILES = sum([len(files) for r, d, files in os.walk(SUMMARIZED_DIR)])
         else:
             self.message_label.setText("ERROR: 'summarized' folder not found")
             return None
 
         # setup SEARCHES_DIR
-        SEARCHES_DIR = os.path.join(data_dir, 'searches')
+        SEARCHES_DIR = os.path.join(data_dir, 'searches').replace(' ','\ ')
         if 'searches' not in dirs_in_data_dir:
             os.mkdir(SEARCHES_DIR)
 
