@@ -90,29 +90,31 @@ email_server_backup/
    #### 3.4. Acepta los cambios en la parte superior derecha.
 
 ### 4. Conéctate a internet en el icono de red en la parte superior derecha la pantalla.
-   #### 4.1. En el fondo tendrás deuna ventana asi:
+   #### 4.1. En el fondo tendrás una ventana asi:
    ![connect_to_tor.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/connect_to_tor.png)
 
    #### 4.2. Haz click en "conectar a tor automáticamente" y luego en el botón "conectar a tor" en la parte inferior derecha de la ventana.
 
-   #### 4.3. una vez terminada la conexión puedes cerrar la ventana que tienes en frente.
+   #### 4.3. Una vez terminada la conexión puedes cerrar la ventana que tienes en frente.
 
 ### 5. Abre una termianl llendo en la parte de arriba a Aplicaciones -> Utilidades -> Terminal
    #### 5.1. Escribe el siguiente comando `sudo apt update` y da `enter` . Te pedirá la clave que pusimos en la paso 2.3. y hará varios procesos antes de terminar.
    ![apt_update.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/apt_update.png)
 
-   #### 5.2. una vez terminado el comando anterior escribe `sudo apt install pv`:
+   #### 5.2. Una vez terminado el comando anterior escribe `sudo apt install pv`:
    ![apt_install_pv.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/apt_install_pv.png)
 
-   #### 5.3. cuando este comando termine de ejecutarse recibirás una notificacion en la parte superior de la pantalla preguntando si quieres que este software si instale cada vez que inicies Tails, di que sí.
+   #### 5.3. Cuando este comando termine de ejecutarse recibirás una notificacion en la parte superior de la pantalla preguntando si quieres que este software si instale cada vez que inicies Tails, di que sí.
    ![pv_install_everytime.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/pv_install_everytime.png)
 
-   
-![boot_menu.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/boot_menu.png)
-![installing_software_done.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/installing_software_done.png)
-![installing_software.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/installing_software.png)
-
+### 6. Reinicia Tails (en la esquina superior derecha) para probar que la configuración inicial quedó bien. En la pantalla inicial desbloquea el alamacenamiento permanente con la clave que pusiste en el paso 3.1. Esta vez no necesitas habilitar la clave de adminitración.
 ![persistent_storage_reboot.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_reboot.png)
+
+   #### 6.1. Conectate a Tor y verás primero una notificación en laparte superior de la pantalla indicando que se está instalando el software adicional:
+   ![installing_software.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/installing_software.png)
+
+   #### 6.2. espera a que la notificación de que el software ha sido instalada aparezca:
+   ![installing_software_done.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/installing_software_done.png)
 
 
 
