@@ -59,7 +59,7 @@ email_server_backup/
 [https://tails.boum.org/install/index.es.html](https://tails.boum.org/install/index.es.html)
 
 ### 2. Arranca Tails en el computador distpuesto para tal fin y realizar las siguientes acciones en la ventana de inicio
-   #### 2.1. Habilitar el almacenamiento permanente/permanent storage:
+   #### 2.1. Habilitar el almacenamiento permanente/persistent storage:
    ![create_persistent_storage.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/create_persistent_storage.png)
 
    #### 2.2. Entra a las opciones adicionales:
