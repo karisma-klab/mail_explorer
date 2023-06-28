@@ -54,37 +54,37 @@ email_server_backup/
 
    > Necesitará acceso al _Boot Menú_ del coputador  en el que correrá Tails, y es muy posible que necesite deshabilitar la opcion de _Secure Boot_ en la BIOS de este mismo computador. Para saber como hacerlo busque las intrucciones específicas para el modelo y marca del computador que esté usando.
 
-### 1. Instalar el sistema operativo **Tails** en un la memoria USB de acuerdo a las intrucciones:
+### 1. Instala el sistema operativo **Tails** en un la memoria USB de acuerdo a las intrucciones:
 
 [https://tails.boum.org/install/index.es.html](https://tails.boum.org/install/index.es.html)
 
-### 2. Arrancar Tails en el computador distpuesto para tal fin y realizar las siguientes acciones en la ventana de inicio
+### 2. Arranca Tails en el computador distpuesto para tal fin y realizar las siguientes acciones en la ventana de inicio
    #### 2.1. Habilitar el almacenamiento permanente/permanent storage:
    ![create_persistent_storage.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/create_persistent_storage.png)
 
-   #### 2.2. Entrar a las opciones adicionales:
+   #### 2.2. Entra a las opciones adicionales:
    ![additional_settings_click.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/additional_settings_click.png)
 
-   #### 2.3. Habilitar la contraseña de adminitración / administration password y poner una contraseña:
+   #### 2.3. Habilita la contraseña de adminitración / administration password y poner una contraseña:
    ![administration_password_click.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/administration_password_click.png)
 
    #### 2.4. Después de poner la clave y dar aceptar, la ventana de inicio debe lucir así:
    ![init_conf.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/init_conf.png)
 
-  #### 2.5. De click en arrancar Tails/start Tails.
+  #### 2.5. Da click en arrancar Tails/start Tails.
   
-### 3. Espere a que el sistema arranque por completo (puede tomar unos minutos) hasta que aparezca la ventana para configurar el almacenamiento permanente y haga click en _continuar_:
+### 3. Espera a que el sistema arranque por completo (puede tomar unos minutos) hasta que aparezca la ventana para configurar el almacenamiento permanente y haz click en _continuar_:
 ![persistent_storage_conf.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_conf.png)
 
-   #### 3.1. introduzca una clave para encriptar si almacenamiento permanente (esta clave deberá ponerla cada vez que encienda el sistema).
+   #### 3.1. introduzce una clave para encriptar el almacenamiento permanente (esta clave deberá ponerla cada vez que encienda el sistema).
    > No confundir con la clave de de administración que pusimos en el paso 2.3.
    
    ![persistent_storage_set_password.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_set_password.png)
 
-   #### 3.2. esperar a que se cree el alamacenamiento:
+   #### 3.2. espera a que se cree el alamacenamiento:
    ![persistent_storage_creating.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_creating.png)
 
-   #### 3.3. En la panatalla finalal de esta configuracion habilita la opcion de Thunderbird que es un cliente de correo si quieres poder ver los correos originales en Tails. La panatalla final debe lucir así:
+   #### 3.3. En la panatalla finaal de esta configuracion habilita la opcion de Thunderbird que es un cliente de correo si quieres poder ver los correos originales en Tails. La panatalla final debe lucir así:
    ![persistent_storage_network_and_thunderbird.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_network_and_thunderbird.png)
 
    #### 3.4. Acepta los cambios en la parte superior derecha.
@@ -97,7 +97,7 @@ email_server_backup/
 
    #### 4.3. Una vez terminada la conexión puedes cerrar la ventana que tienes en frente.
 
-### 5. Abre una termianl llendo en la parte de arriba a Aplicaciones -> Utilidades -> Terminal
+### 5. Abre una terminal llendo en la parte de arriba a Aplicaciones -> Utilidades -> Terminal
    #### 5.1. Escribe el siguiente comando `sudo apt update` y da `enter` . Te pedirá la clave que pusimos en la paso 2.3. y hará varios procesos antes de terminar.
    ![apt_update.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/apt_update.png)
 
