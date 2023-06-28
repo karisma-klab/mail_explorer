@@ -105,9 +105,11 @@ email_server_backup/
    ![apt_install_pv.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/apt_install_pv.png)
 
    #### 5.3. cuando este comando termine de ejecutarse recibirás una notificacion en la parte superior de la pantalla preguntando si quieres que este software si instale cada vez que inicies Tails, di que sí.
+   ![pv_install_everytime.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/pv_install_everytime.png)
+
+   
 ![boot_menu.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/boot_menu.png)
 ![installing_software_done.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/installing_software_done.png)
-![pv_install_everytime.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/pv_install_everytime.png)
 ![installing_software.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/installing_software.png)
 
 ![persistent_storage_reboot.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_reboot.png)
