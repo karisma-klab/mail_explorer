@@ -118,15 +118,46 @@ email_server_backup/
 
 ### 7. Conecta la USB o Disco donde vas a guardar el resumen y mail explorer
    #### 7.1. Busca el dispositivo en el explorador de archivos de Tails llendo a _lugares -> Home_ en la barra superior. en la ventana, busca el dispositivo a la derecha y haz click sobre el para montarlo.
+   
    #### 7.2 En el dispositivo, crea una carpeta que se llame **data** y dentro de esta una que se llame **summarized**
-   #### 7.3 Vuelve a la raiz del dispositivo (haciendo click en el dispositivo en la parte izquierda de la ventana), haz click derecho en el espacio donde se muestran los direcotrios y selecciona "abrir en terminal"
-   #### 7.4. Escribe el siguiente comando en la termnal: `git clone https://github.com/karisma-klab/mail_explorer.git`
-   #### 7.5. cierra la terminal.
+   ![summarized_dir_create.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/summarized_dir_create.png)
+   
+   #### 7.3. Vuelve a la raiz del dispositivo (haciendo click en el dispositivo en la parte izquierda de la ventana), haz click derecho en el espacio donde se muestran los direcotrios y selecciona "abrir en terminal"
+   ![open_in_terminal.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/open_in_terminal.png)
 
-> Instalacion finalizada!
+   #### 7.4. Escribe el siguiente comando en la termnal: `git clone https://github.com/karisma-klab/mail_explorer.git`
+   ![clone_mail_explorer.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/clone_mail_explorer.png)
+
+   #### 7.5. cierra la terminal.
+   
+
+**---- Instalacion finalizada! -----**
 
 ## Crear el resumen (summarize)
    
+En este proceso tomaremos una carpeta con archivos de correo (.eml) que están empaquetados y comprimidos. la procesaremos para sacar un resumen de todos esos correos en archivos de texto. El resumen consiste en extraer, el To, From, Date, Subject, Body y los nombres de los archivos adjuntos y ponerlos en un archivo de texto conservando la misma estructura que tienen los archivos comprimidos originales, esto permite tener una copia reducida de todo el cuerpo de correos donde se pueden buscar términos que ubiquen a las personas investigadoras sobre donde encontrar un tema específico en los correos originales. En los correos localizados en el archivo original se puedan rastrear otros correos que participan en la conversación, ver los archivos adjuntos, etc.
+
+Para este fin usaremos el script `summarizer.py` de Mail Explorer que es un programa en líne ade comandos que crea el resumen del cuerpo de correos.
+
+Este script, ademas de realizar este proceso tiene dos funcionalidades adicionales importantes:
+   1. El proceso se puede cancelar con Control-C y cuando se ponga de nuevo en marcha seguira en el punto donde se dejó. Esto también es importante si suceden errores durante el proceso ya iagualmente, reiniciando la ejecución podemos seguir en el punto donde ocurrió el error.
+   2. Pensando en procesar cuerpos de correos muy grandes este script puede jecutar varios hilos al tiempo que se especifican con la opcion `-t`. Aconsejamos 4 hilos simultaneos en condiciones normales.
+
+
+Estas son todas las opciones de `summarizer.py`:
+```
+$./summarizer.py --help                                                                                           ✔ 
+Usage: summarizer.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -f FILE, --file=FILE  Run test on this eml file
+  -z FILE, --zip=FILE   Run test on this zip file
+  -s DIR                source directory
+  -d DIR                destination directory
+  -t NUM                threads number
+  -q                    don't print status messages to stdout
+```
 
 
 
