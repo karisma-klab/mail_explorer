@@ -164,7 +164,7 @@ Básicamente debemos indicarle cual es el directorio donde están los archivos d
 ### 1. Averigua la ruta al directorio donde están los archivos originales (los comprimidos):
    #### 1.1. Conecta el dicoduro con los archivos comprimidos al computador, búscalo en el explorador y localiza la carpeta con los archivos. Haz click derecho sobre está y da click en **propiedades** y anota la ruta y el nombre de la carpeta:
 
-   ![ruta_archivos originales.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/ruta_archivos originales.png)
+   ![ruta_archivos_originales.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/ruta_archivos_originales.png)
 
    por lo tanto, usando los datos del ejemplo, la carpeta de origen es: `/media/amnecia/3CB3-B024/archivos_comprimidos/`. Toma nota de tu directorio de origen de acuerdo a los datos que obtengas en las **propiedades** de tu carpeta.
 
