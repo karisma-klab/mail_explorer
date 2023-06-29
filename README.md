@@ -116,6 +116,17 @@ email_server_backup/
    #### 6.2. espera a que la notificación de que el software ha sido instalada aparezca:
    ![installing_software_done.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/installing_software_done.png)
 
+### 7. Conecta la USB o Disco donde vas a guardar el resumen y mail explorer
+   #### 7.1. Busca el dispositivo en el explorador de archivos de Tails llendo a _lugares -> Home_ en la barra superior. en la ventana, busca el dispositivo a la derecha y haz click sobre el para montarlo.
+   #### 7.2 En el dispositivo, crea una carpeta que se llame **data** y dentro de esta una que se llame **summarized**
+   #### 7.3 Vuelve a la raiz del dispositivo (haciendo click en el dispositivo en la parte izquierda de la ventana), haz click derecho en el espacio donde se muestran los direcotrios y selecciona "abrir en terminal"
+   #### 7.4. Escribe el siguiente comando en la termnal: `git clone https://github.com/karisma-klab/mail_explorer.git`
+   #### 7.5. cierra la terminal.
+
+> Instalacion finalizada!
+
+## Crear el resumen (summarize)
+   
 
 
 
