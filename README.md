@@ -164,11 +164,13 @@ Básicamente debemos indicarle cual es el directorio donde están los archivos d
 ### 1. Averigua la ruta al directorio donde están los archivos originales (los comprimidos):
    #### 1.1. Conecta el dicoduro con los archivos comprimidos al computador, búscalo en el explorador y localiza la carpeta con los archivos. Haz click derecho sobre está y da click en **propiedades** y anota la ruta y el nombre de la carpeta:
 
-   [ruta de la carpeta img]
+   ![ruta_archivos originales.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/ruta_archivos originales.png)
 
    por lo tanto, usando los datos del ejemplo, la carpeta de origen es: `/media/amnecia/3CB3-B024/archivos_comprimidos/`. Toma nota de tu directorio de origen de acuerdo a los datos que obtengas en las **propiedades** de tu carpeta.
 
 ### 2. En el exploarador de archivos, ve a la carpeta donde quedó guardado Mail Explorer, entra a la carpeta de Mail Explorer, haz click derecho en cualquier parte de la pantalla y pulsa en "abrir en terminal"
+
+![open_in_terminal_mail_exp.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/open_in_terminal_mail_exp.png)
 
 ### 3. si seguiste los pasos de instalación al pie de la letra puedes obviar este paso, sino debes averiguar la ruta al directorio 'summarized' de la misma manera en qu lo hicimos para el directorio de origen.
 
