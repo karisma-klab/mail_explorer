@@ -159,7 +159,39 @@ Options:
   -q                    don't print status messages to stdout
 ```
 
+Básicamente debemos indicarle cual es el directorio donde están los archivos de origen en el formato explicado anteriormente que se indica con la opcion `-s` y un directorio de destino que es el directorio `summarized/` que está dentro de carpta `data/` que creamos en el paso 7.2. de la instalación que se indica con la opcion `-d`.
 
+### 1. Averigua la ruta al directorio donde están los archivos originales (los comprimidos):
+   #### 1.1. Conecta el dicoduro con los archivos comprimidos al computador, búscalo en el explorador y localiza la carpeta con los archivos. Haz click derecho sobre está y da click en **propiedades** y anota la ruta y el nombre de la carpeta:
 
+   [ruta de la carpeta img]
 
+   por lo tanto, usando los datos del ejemplo, la carpeta de origen es: `/media/amnecia/3CB3-B024/archivos_comprimidos/`. Toma nota de tu directorio de origen de acuerdo a los datos que obtengas en las **propiedades** de tu carpeta.
+
+### 2. En el exploarador de archivos, ve a la carpeta donde quedó guardado Mail Explorer, entra a la carpeta de Mail Explorer, haz click derecho en cualquier parte de la pantalla y pulsa en "abrir en terminal"
+
+### 3. si seguiste los pasos de instalación al pie de la letra puedes obviar este paso, sino debes averiguar la ruta al directorio 'summarized' de la misma manera en qu lo hicimos para el directorio de origen.
+
+### 4. escribel el comando `./summarized.py -s [directorio de origen] -d [directorio de destino (summarized)]`. según nuestro ejemplo el commando debería quedar de la siguiente manera:
+
+```bash
+./summarizer.py -s /media/amnecia/3CB3-B024/archivos_comprimidos/ -d ../data/summarized/ -t 4
+```
+
+> Si hiciste el paso 3 reemplaza '../data/summarized/' por la ruta a tu directorio summarized.
+
+> el -t 4 indica que haga 4 procesos al tiempo. Puedes cambiar este parámetro para indicar cuantos procesos al tiempo quieres que realice summarizer.py, normalmente 4 es suficiente
+
+Dale enter, y si todo sale bien veras una barra de progreso indicando el estado del proceso:
+
+```
+./summarizer.py -s /media/amnecia/3CB3-B024/archivos_comprimidos/ -d ../data/summarized/ -t 4
+Progress: |███-----------------------------------------------| 7.7% (3/39) Complete
+```
+
+En cualquier momento de este proceso puedes dar Control-C para cancelar el proceso y puedes arrancar de nuevo donde lo dejaste si ejecutas el mismo comando después.
+
+Cuando el proceso llegue al 100% mostrará un aviso de cuanto demoró la ejecución y el proceso habrá terminado.
+
+> Advertencia: si tus directorios de origen o destino en alguna parta de la ruta tienen espacios, por ejempo, si tu directorio de origen luce como así `/media/amnecia/MI HD/archivos comprimidos/` debes escapar los espacios con back-slash (\\) cuando pongas el comando. en el caso del ejemplo el directorio quedaría así: `/media/amnecia/MI\ HD/archivos\ comprimidos/` (nota los back-slash despues de 'MI' y de 'archivos')
 
