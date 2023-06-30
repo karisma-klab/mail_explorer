@@ -180,6 +180,8 @@ Básicamente debemos indicarle cual es el directorio donde están los archivos d
 ./summarizer.py -s /media/amnecia/3CB3-B024/archivos_comprimidos/ -d ../data/summarized/ -t 4
 ```
 
+> Si este comando falla, intenta dar permisos de ejecucion a todos los scripts de python escribiendo `chmod +x *.py` ejecutalo escribiendo `python3 summarizer.py`
+
 > Si hiciste el paso 3 reemplaza '../data/summarized/' por la ruta a tu directorio summarized.
 
 > el -t 4 indica que haga 4 procesos al tiempo. Puedes cambiar este parámetro para indicar cuantos procesos al tiempo quieres que realice summarizer.py, normalmente 4 es suficiente
@@ -197,3 +199,41 @@ Cuando el proceso llegue al 100% mostrará un aviso de cuanto demoró la ejecuci
 
 > Advertencia: si tus directorios de origen o destino en alguna parta de la ruta tienen espacios, por ejempo, si tu directorio de origen luce como así `/media/amnecia/MI HD/archivos comprimidos/` debes escapar los espacios con back-slash (\\) cuando pongas el comando. en el caso del ejemplo el directorio quedaría así: `/media/amnecia/MI\ HD/archivos\ comprimidos/` (nota los back-slash despues de 'MI' y de 'archivos')
 
+> TODO: hacer nota sobre recycler.sh
+
+## Buscar en el resumen
+
+Una vez creado nuestro resumen ya estamos listos para hacer búsquedas. Para tal fin solo debemos ejecutar el archivo `search.py` que se encuentra en la carpeta de Mail Explorer.
+
+Estas búsquedas que realizaremos desde la interfaz grafica de `search.py` deja registros de las búsquedas en archivos de texto en una carpata llamada `searches` que se creará automáticamente en la carpeta `data`. De cualquier manera `search.py` nos permite navegar estos archivos desde su interfaz, pero en caso de que queramos verlos sin esta aplicación podemos abrir directamente los archivos.
+
+> Tips de búsqueda: `search.py` está optimizado para hacer búsquedas en español, se recomienda poner el termino o frase clave a buscar en minúsculas y sin tildes (acentos). Es sistema se encargará de buscarlos automáticamente con o sin tilde y en cualquier combinación de mayúsculas y minúsculas. Este sistema no usa búsquedas relacionales por lo tanto solo busca terminos exactos.
+
+### 1. De igual manera que cuando ejecutamos `summarizer.py` debemos ubicar la carpeta de Mail Explorer en el exploarador de archivos de Tails, hacer click derecho y pulsar en 'abrir en terminal'.
+
+   #### 1.1. en la terminal ejecutar `./search.py`. Nos debe aparecer una ventana preguntando por la ubicación del directorio data, seleciónalo y da click en 'aceptar'
+   
+   > Si este comando falla, intenta dar permisos de ejecucion a todos los scripts de python escribiendo `chmod +x *.py` o ejecutalo escribiendo `python3 search.py`.
+
+   ![select_data_dir.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/select_data_dir.png)
+
+   si todo sale bien saldra un aviso como este:
+
+   ![data_dir_all_good.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/data_dir_all_good.png)
+
+   Ciérralo y el programa arrancará.
+
+### 2. En la ventana de búsqueda puedes poner término y pulsar en el botón de 'search'. Este botón te mostrará el porcentaje de la búsqueda:
+![search_test_0.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/search_test_0.png)
+
+### 3. Una vez la búsqueda ha terminado verás una entrada en la tabla de abajo de la ventana (search history) donde podrás hacer click y ver los resultados de la búsqueda
+
+![search_test_results.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/search_test_results.png)
+
+### 4. Una vez abiertos los resultados podrás ver el listado de los archivos donde se encontró la el término o frase clave que estabas buscando junto con un pedacito del correo donde se econtró el término. con esta información puedrás encontrar el archivo original en los archivos de origen. Encuentralo y podrás abrilo en Thunderbird para ver archivo completo, con adjuntos y toda la información que te permita continuar tu investigación
+
+![look_results.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/look_results.png)
+
+## Necesitas ayuda?
+
+Puedes contactarnos si necesitas ayuda instalando o usando Mail Explorer. escribe un correo a a klab[at]karisma.org.co y cuéntanos que necesitas.
