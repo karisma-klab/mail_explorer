@@ -14,7 +14,7 @@ _Mail Explorer_ tiene dos componenetes principales:
 2. **El buscador**: Es un script que permite hacer búsquedas en el resumen generado por el _summarizer_ de tal forma que se puedan ubicar plabras o frases clave en los datos básicos de los correos y encontrar puntos de referencia para ubicar información en el paquete original de correos (que por las dudas, queda intacto)
 
 ## ¿ Qué formatos de archivos comprimidos o empaquetados soporta _Mail Explorer_ ?
-Por el momento Mail Explorer soporta un directorio con archivos .zip donde cada archivo .zip representa a un usuario de correo y contiene los archivos .elm correspondietes a ese uauario:
+Por el momento Mail Explorer soporta un directorio con archivos .zip donde cada archivo .zip representa a un usuario de correo y contiene los archivos .elm correspondietes a ese usuario:
 
 Ejemplo:
 
@@ -38,21 +38,21 @@ email_server_backup/
 ## Instalación:
 ### 0. Requerimientos y considerarciones:
 * El cuerpo de correos originales empaquetados o comprimidos en un disco duro, idealmente externo y de estado sólido (SSD).
-* Un disco de Estado sólido (idealmente) para guardar el resumen, los datos de las búsquedas y los scripts de Mail Explorer.
+* Un disco de estado sólido (idealmente) para guardar el resumen, los datos de las búsquedas y los scripts de Mail Explorer.
 
    *Precaución:*
-  > Es importante revisar que que este disco esté fomateado con bloque de máximo 4 Kb. Es posible que discos de alta capacidad vengan formateados con bloques de 256 Kb lo cual causa un resumen muy voluminoso ya que la mayoría de los archivos de texto resumidos pesan mucho menos de 256 Kb. Por la dudas, siimplemente pude formatear el disco con el sistema de archivos NTFS. **Recuerde que al formatear el disco se perderán todos los datos que haya en el**
+  > Es importante revisar que este disco esté fomateado con bloques de máximo 4 Kb. Es posible que discos de alta capacidad vengan formateados con bloques de 256 Kb lo cual causa un resumen muy voluminoso ya que la mayoría de los archivos de texto resumidos pesan mucho menos de 256 Kb. Por la dudas, simplemente pude formatear el disco con el sistema de archivos NTFS. **Recuerde que al formatear el disco se perderán todos los datos que haya en él.**
   
-* Una memoria USB de mas de 8GB para instalar tails y los [requerimientos](https://tails.boum.org/doc/about/requirements/index.es.html) mínimos para instalar Tails. **(Opcional)**
+* Una memoria USB de más de 8GB que cumpla con los [requerimientos](https://tails.boum.org/doc/about/requirements/index.es.html) mínimos para instalar Tails. **(Opcional)**
 
-   > **Tails** es un sistema operitvo (Linux específicamente) amnésico, es decir, no deja o deja muy pocos rastros de actividad una vez se desconecta. Funciona como un una versión _live_ de linux. Además ofrece un entorno adaptado a la privacidad protegiendo, en la medida de lo posible, la identidad de sus usuarios. Recomendamos firmemente usar Mail Explorer en conjunto con Tails.
+   > **Tails** es un sistema operativo (Linux específicamente) amnésico, es decir, no deja o deja muy pocos rastros de actividad una vez se desconecta. Funciona como una versión _live_ de linux. Además ofrece un entorno adaptado a la privacidad protegiendo, en la medida de lo posible, la identidad de sus usuarios. Recomendamos firmemente usar Mail Explorer en conjunto con Tails.
 * Conexión a internet.
 * Computador para correr Tails. Puede usar un computador aparte del personal para correr Tails o correrlo en su computador de simpre.
-   * tenga esto en cuenta al decidir como quiere acceder a la información.
-   * Puede consultar los correos originales en la misma instancia de Tails que use para las búsquedas usando Thunderbird o su correo de cliente preferido. Este proceso se puede realizar en computadores difirentes: uno para las buúsquedas y otro para consulta de los correos originales. Recomendamos usar Tails para ambos procesos.
-   * El proceso de "resumir" puede tomar dias, sinembargo podrá pararlo y seguir luego en el punto en el que lo dejó. Solo hay que hacerlo una vez.
+   * Tenga esto en cuenta al decidir como quiere acceder a la información.
+   * Puede consultar los correos originales en la misma instancia de Tails que use para las búsquedas usando Thunderbird o su cliente de correo preferido. Este proceso se puede realizar en computadores diferentes: uno para las buúsquedas y otro para consulta de los correos originales. Recomendamos usar Tails para ambos procesos.
+   * El proceso de "resumir" puede tomar días, sin embargo, podrá pausarlo y seguir luego en el punto en el que lo dejó. Solo hay que hacerlo una vez.
 
-   > Necesitará acceso al _Boot Menú_ del coputador  en el que correrá Tails, y es muy posible que necesite deshabilitar la opcion de _Secure Boot_ en la BIOS de este mismo computador. Para saber como hacerlo busque las intrucciones específicas para el modelo y marca del computador que esté usando.
+   > Necesitará acceso al _Boot Menú_ del computador en el que correrá Tails, y es muy posible que necesite deshabilitar la opción de _Secure Boot_ en la BIOS de este mismo computador. Para saber cómo hacerlo busque las intrucciones específicas para el modelo y marca del computador que esté usando.
 
 ### 1. Instala el sistema operativo **Tails** en un la memoria USB de acuerdo a las intrucciones:
 
@@ -71,33 +71,33 @@ email_server_backup/
    #### 2.4. Después de poner la clave y dar aceptar, la ventana de inicio debe lucir así:
    ![init_conf.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/init_conf.png)
 
-  #### 2.5. Da click en arrancar Tails/start Tails.
+  #### 2.5. Da clic en arrancar Tails/start Tails.
   
 ### 3. Espera a que el sistema arranque por completo (puede tomar unos minutos) hasta que aparezca la ventana para configurar el almacenamiento permanente y haz click en _continuar_:
 ![persistent_storage_conf.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_conf.png)
 
-   #### 3.1. introduzce una clave para encriptar el almacenamiento permanente (esta clave deberá ponerla cada vez que encienda el sistema).
-   > No confundir con la clave de de administración que pusimos en el paso 2.3.
+   #### 3.1. Introduzce una clave para encriptar el almacenamiento permanente (esta clave deberá ponerla cada vez que encienda el sistema).
+   > No confundir con la clave de administración que pusimos en el paso 2.3.
    
    ![persistent_storage_set_password.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_set_password.png)
 
-   #### 3.2. espera a que se cree el alamacenamiento:
+   #### 3.2. Espera a que se cree el alamacenamiento:
    ![persistent_storage_creating.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_creating.png)
 
-   #### 3.3. En la panatalla finaal de esta configuracion habilita la opcion de Thunderbird que es un cliente de correo si quieres poder ver los correos originales en Tails. La panatalla final debe lucir así:
+   #### 3.3. En la pantalla final de esta configuración, habilita la opcion de Thunderbird que es un cliente de correo si quieres poder ver los correos originales en Tails. La panatalla final debe lucir así:
    ![persistent_storage_network_and_thunderbird.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_network_and_thunderbird.png)
 
    #### 3.4. Acepta los cambios en la parte superior derecha.
 
-### 4. Conéctate a internet en el icono de red en la parte superior derecha la pantalla.
+### 4. Conéctate a internet, haz clic en el icono de red en la parte superior derecha de la pantalla.
    #### 4.1. En el fondo tendrás una ventana asi:
    ![connect_to_tor.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/connect_to_tor.png)
 
-   #### 4.2. Haz click en "conectar a tor automáticamente" y luego en el botón "conectar a tor" en la parte inferior derecha de la ventana.
+   #### 4.2. Haz clic en "conectar a tor automáticamente" y luego en el botón "conectar a tor" en la parte inferior derecha de la ventana.
 
    #### 4.3. Una vez terminada la conexión puedes cerrar la ventana que tienes en frente.
 
-### 5. Abre una terminal llendo en la parte de arriba a Aplicaciones -> Utilidades -> Terminal
+### 5. Abre una terminal yendo en la parte de arriba a Aplicaciones -> Utilidades -> Terminal
    #### 5.1. Escribe el siguiente comando `sudo apt update` y da `enter` . Te pedirá la clave que pusimos en la paso 2.3. y hará varios procesos antes de terminar.
    ![apt_update.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/apt_update.png)
 
@@ -110,22 +110,22 @@ email_server_backup/
 ### 6. Reinicia Tails (en la esquina superior derecha) para probar que la configuración inicial quedó bien. En la pantalla inicial desbloquea el alamacenamiento permanente con la clave que pusiste en el paso 3.1. Esta vez no necesitas habilitar la clave de adminitración.
 ![persistent_storage_reboot.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/persistent_storage_reboot.png)
 
-   #### 6.1. Conectate a Tor y verás primero una notificación en laparte superior de la pantalla indicando que se está instalando el software adicional:
+   #### 6.1. Conectate a Tor y verás primero una notificación en la parte superior de la pantalla indicando que se está instalando el software adicional:
    ![installing_software.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/installing_software.png)
 
-   #### 6.2. espera a que la notificación de que el software ha sido instalada aparezca:
+   #### 6.2. Espera a que la notificación de que el software ha sido instalada aparezca:
    ![installing_software_done.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/installing_software_done.png)
 
 ### 7. Conecta la USB o Disco donde vas a guardar el resumen y mail explorer
-   #### 7.1. Busca el dispositivo en el explorador de archivos de Tails llendo a _lugares -> Home_ en la barra superior. en la ventana, busca el dispositivo a la derecha y haz click sobre el para montarlo.
+   #### 7.1. Busca el dispositivo en el explorador de archivos de Tails llendo a _lugares -> Home_ en la barra superior. En la ventana, busca el dispositivo a la derecha y haz clic sobre él para montarlo.
    
    #### 7.2 En el dispositivo, crea una carpeta que se llame **data** y dentro de esta una que se llame **summarized**
    ![summarized_dir_create.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/summarized_dir_create.png)
    
-   #### 7.3. Vuelve a la raiz del dispositivo (haciendo click en el dispositivo en la parte izquierda de la ventana), haz click derecho en el espacio donde se muestran los direcotrios y selecciona "abrir en terminal"
+   #### 7.3. Vuelve a la raiz del dispositivo (haciendo clic en el dispositivo en la parte izquierda de la ventana), haz clic derecho en el espacio donde se muestran los directorios y selecciona "abrir en terminal"
    ![open_in_terminal.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/open_in_terminal.png)
 
-   #### 7.4. Escribe el siguiente comando en la termnal: `git clone https://github.com/karisma-klab/mail_explorer.git`
+   #### 7.4. Escribe el siguiente comando en la terminal: `git clone https://github.com/karisma-klab/mail_explorer.git`
    ![clone_mail_explorer.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/clone_mail_explorer.png)
 
    #### 7.5. cierra la terminal.
@@ -135,13 +135,13 @@ email_server_backup/
 
 ## Crear el resumen (summarize)
    
-En este proceso tomaremos una carpeta con archivos de correo (.eml) que están empaquetados y comprimidos. la procesaremos para sacar un resumen de todos esos correos en archivos de texto. El resumen consiste en extraer, el To, From, Date, Subject, Body y los nombres de los archivos adjuntos y ponerlos en un archivo de texto conservando la misma estructura que tienen los archivos comprimidos originales, esto permite tener una copia reducida de todo el cuerpo de correos donde se pueden buscar términos que ubiquen a las personas investigadoras sobre donde encontrar un tema específico en los correos originales. En los correos localizados en el archivo original se puedan rastrear otros correos que participan en la conversación, ver los archivos adjuntos, etc.
+En este proceso tomaremos una carpeta con archivos de correo (.eml) que están empaquetados y comprimidos. La procesaremos para sacar un resumen de todos esos correos en archivos de texto. El resumen consiste en extraer, los campos To, From, Date, Subject, Body y los nombres de los archivos adjuntos y ponerlos en un archivo de texto conservando la misma estructura que tienen los archivos comprimidos originales, esto permite tener una copia reducida de todo el cuerpo de correos donde se pueden buscar términos que faciliten a las personas investigadoras saber dónde encontrar un tema específico en los correos originales. En los correos localizados en el archivo original se puedan rastrear otros correos que participan en la conversación, ver los archivos adjuntos, etc.
 
-Para este fin usaremos el script `summarizer.py` de Mail Explorer que es un programa en líne ade comandos que crea el resumen del cuerpo de correos.
+Para este fin usaremos el script `summarizer.py` de Mail Explorer que es un programa en línea de comandos que crea el resumen del cuerpo de correos.
 
-Este script, ademas de realizar este proceso tiene dos funcionalidades adicionales importantes:
-   1. El proceso se puede cancelar con Control-C y cuando se ponga de nuevo en marcha seguira en el punto donde se dejó. Esto también es importante si suceden errores durante el proceso ya iagualmente, reiniciando la ejecución podemos seguir en el punto donde ocurrió el error.
-   2. Pensando en procesar cuerpos de correos muy grandes este script puede jecutar varios hilos al tiempo que se especifican con la opcion `-t`. Aconsejamos 4 hilos simultaneos en condiciones normales.
+Este script, además de realizar este proceso tiene dos funcionalidades adicionales importantes:
+   1. El proceso se puede cancelar con Control-C y cuando se ponga de nuevo en marcha seguira en el punto donde se dejó. Esto también es importante si suceden errores durante el proceso ya que igualmente, reiniciando la ejecución podemos seguir en el punto donde ocurrió el error.
+   2. Pensando en procesar cuerpos de correos muy grandes este script puede ejecutar varios hilos al tiempo que se especifican con la opcion `-t`. Aconsejamos 4 hilos simultáneos en condiciones normales.
 
 
 Estas son todas las opciones de `summarizer.py`:
@@ -159,7 +159,7 @@ Options:
   -q                    don't print status messages to stdout
 ```
 
-Básicamente debemos indicarle cual es el directorio donde están los archivos de origen en el formato explicado anteriormente que se indica con la opcion `-s` y un directorio de destino que es el directorio `summarized/` que está dentro de carpta `data/` que creamos en el paso 7.2. de la instalación que se indica con la opcion `-d`.
+Básicamente debemos indicarle cual es el directorio donde están los archivos de origen en el formato explicado anteriormente que se indica con la opcion `-s` y un directorio de destino que es el directorio `summarized/` que está dentro de la carpeta `data/` que creamos en el paso 7.2. de la instalación que se indica con la opcion `-d`.
 
 ### 1. Averigua la ruta al directorio donde están los archivos originales (los comprimidos):
    #### 1.1. Conecta el dicoduro con los archivos comprimidos al computador, búscalo en el explorador y localiza la carpeta con los archivos. Haz click derecho sobre está y da click en **propiedades** y anota la ruta y el nombre de la carpeta:
@@ -168,25 +168,25 @@ Básicamente debemos indicarle cual es el directorio donde están los archivos d
 
    por lo tanto, usando los datos del ejemplo, la carpeta de origen es: `/media/amnecia/3CB3-B024/archivos_comprimidos/`. Toma nota de tu directorio de origen de acuerdo a los datos que obtengas en las **propiedades** de tu carpeta.
 
-### 2. En el exploarador de archivos, ve a la carpeta donde quedó guardado Mail Explorer, entra a la carpeta de Mail Explorer, haz click derecho en cualquier parte de la pantalla y pulsa en "abrir en terminal"
+### 2. En el exploarador de archivos, ve a la carpeta donde quedó guardado Mail Explorer, entra a la carpeta de Mail Explorer, haz clic derecho en cualquier parte de la pantalla y pulsa en "abrir en terminal"
 
 ![open_in_terminal_mail_exp.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/open_in_terminal_mail_exp.png)
 
-### 3. si seguiste los pasos de instalación al pie de la letra puedes obviar este paso, sino debes averiguar la ruta al directorio 'summarized' de la misma manera en qu lo hicimos para el directorio de origen.
+### 3. Si seguiste los pasos de instalación al pie de la letra puedes obviar este paso, si no debes averiguar la ruta al directorio 'summarized' de la misma manera en que lo hicimos para el directorio de origen.
 
-### 4. escribel el comando `./summarized.py -s [directorio de origen] -d [directorio de destino (summarized)]`. según nuestro ejemplo el commando debería quedar de la siguiente manera:
+### 4. Escribe el comando `./summarized.py -s [directorio de origen] -d [directorio de destino (summarized)]`. Según nuestro ejemplo, el commando debería quedar de la siguiente manera:
 
 ```bash
 ./summarizer.py -s /media/amnecia/3CB3-B024/archivos_comprimidos/ -d ../data/summarized/ -t 4
 ```
 
-> Si este comando falla, intenta dar permisos de ejecucion a todos los scripts de python escribiendo `chmod +x *.py` ejecutalo escribiendo `python3 summarizer.py`
+> Si este comando falla, intenta dar permisos de ejecucion a todos los scripts de python escribiendo `chmod +x *.py` ejecútalo escribiendo `python3 summarizer.py`
 
 > Si hiciste el paso 3 reemplaza '../data/summarized/' por la ruta a tu directorio summarized.
 
 > el -t 4 indica que haga 4 procesos al tiempo. Puedes cambiar este parámetro para indicar cuantos procesos al tiempo quieres que realice summarizer.py, normalmente 4 es suficiente
 
-Dale enter, y si todo sale bien veras una barra de progreso indicando el estado del proceso:
+Dale enter, y si todo sale bien, verás una barra de progreso indicando el estado del proceso:
 
 ```
 ./summarizer.py -s /media/amnecia/3CB3-B024/archivos_comprimidos/ -d ../data/summarized/ -t 4
@@ -197,7 +197,7 @@ En cualquier momento de este proceso puedes dar Control-C para cancelar el proce
 
 Cuando el proceso llegue al 100% mostrará un aviso de cuanto demoró la ejecución y el proceso habrá terminado.
 
-> Advertencia: si tus directorios de origen o destino en alguna parta de la ruta tienen espacios, por ejempo, si tu directorio de origen luce como así `/media/amnecia/MI HD/archivos comprimidos/` debes escapar los espacios con back-slash (\\) cuando pongas el comando. en el caso del ejemplo el directorio quedaría así: `/media/amnecia/MI\ HD/archivos\ comprimidos/` (nota los back-slash despues de 'MI' y de 'archivos')
+> Advertencia: si tus directorios de origen o destino en alguna parta de la ruta tienen espacios, por ejempo, si tu directorio de origen luce así `/media/amnecia/MI HD/archivos comprimidos/` debes reemplazar los espacios con back-slash (\\) cuando pongas el comando. En el caso del ejemplo, el directorio quedaría así: `/media/amnecia/MI\ HD/archivos\ comprimidos/` (nota los back-slash despues de 'MI' y de 'archivos')
 
 > TODO: hacer nota sobre recycler.sh
 
@@ -205,35 +205,35 @@ Cuando el proceso llegue al 100% mostrará un aviso de cuanto demoró la ejecuci
 
 Una vez creado nuestro resumen ya estamos listos para hacer búsquedas. Para tal fin solo debemos ejecutar el archivo `search.py` que se encuentra en la carpeta de Mail Explorer.
 
-Estas búsquedas que realizaremos desde la interfaz grafica de `search.py` deja registros de las búsquedas en archivos de texto en una carpata llamada `searches` que se creará automáticamente en la carpeta `data`. De cualquier manera `search.py` nos permite navegar estos archivos desde su interfaz, pero en caso de que queramos verlos sin esta aplicación podemos abrir directamente los archivos.
+Estas búsquedas que realizaremos desde la interfaz gráfica de `search.py` dejan registros de las búsquedas en archivos de texto en una carpata llamada `searches` que se creará automáticamente en la carpeta `data`. De cualquier manera `search.py` nos permite navegar estos archivos desde su interfaz, pero en caso de que queramos verlos sin esta aplicación podemos abrir directamente los archivos.
 
-> Tips de búsqueda: `search.py` está optimizado para hacer búsquedas en español, se recomienda poner el termino o frase clave a buscar en minúsculas y sin tildes (acentos). Es sistema se encargará de buscarlos automáticamente con o sin tilde y en cualquier combinación de mayúsculas y minúsculas. Este sistema no usa búsquedas relacionales por lo tanto solo busca terminos exactos.
+> Tips de búsqueda: `search.py` está optimizado para hacer búsquedas en español, se recomienda poner el termino o frase clave a buscar en minúsculas y sin tildes (acentos). Es sistema se encargará de buscarlos automáticamente con o sin tilde y en cualquier combinación de mayúsculas y minúsculas. Este sistema no usa búsquedas relacionales por lo tanto solo busca términos exactos.
 
-### 1. De igual manera que cuando ejecutamos `summarizer.py` debemos ubicar la carpeta de Mail Explorer en el exploarador de archivos de Tails, hacer click derecho y pulsar en 'abrir en terminal'.
+### 1. De igual manera que cuando ejecutamos `summarizer.py` debemos ubicar la carpeta de Mail Explorer en el explorador de archivos de Tails, hacer clic derecho y pulsar en 'abrir en terminal'.
 
-   #### 1.1. en la terminal ejecutar `./search.py`. Nos debe aparecer una ventana preguntando por la ubicación del directorio data, seleciónalo y da click en 'aceptar'
+   #### 1.1. En la terminal ejecutar `./search.py`. Nos debe aparecer una ventana preguntando por la ubicación del directorio data, seleciónalo y da clic en 'aceptar'
    
-   > Si este comando falla, intenta dar permisos de ejecucion a todos los scripts de python escribiendo `chmod +x *.py` o ejecutalo escribiendo `python3 search.py`.
+   > Si este comando falla, intenta dar permisos de ejecución a todos los scripts de python escribiendo `chmod +x *.py` o ejecútalo escribiendo `python3 search.py`.
 
    ![select_data_dir.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/select_data_dir.png)
 
-   si todo sale bien saldra un aviso como este:
+   si todo sale bien saldrá un aviso como este:
 
    ![data_dir_all_good.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/data_dir_all_good.png)
 
    Ciérralo y el programa arrancará.
 
-### 2. En la ventana de búsqueda puedes poner término y pulsar en el botón de 'search'. Este botón te mostrará el porcentaje de la búsqueda:
+### 2. En la ventana de búsqueda puedes poner un término y pulsar en el botón de 'search'. Este botón te mostrará el porcentaje de la búsqueda:
 ![search_test_0.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/search_test_0.png)
 
-### 3. Una vez la búsqueda ha terminado verás una entrada en la tabla de abajo de la ventana (search history) donde podrás hacer click y ver los resultados de la búsqueda
+### 3. Una vez la búsqueda ha terminado verás una entrada en la tabla de abajo de la ventana (search history) donde podrás hacer clic y ver los resultados de la búsqueda
 
 ![search_test_results.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/search_test_results.png)
 
-### 4. Una vez abiertos los resultados podrás ver el listado de los archivos donde se encontró la el término o frase clave que estabas buscando junto con un pedacito del correo donde se econtró el término. con esta información puedrás encontrar el archivo original en los archivos de origen. Encuentralo y podrás abrilo en Thunderbird para ver archivo completo, con adjuntos y toda la información que te permita continuar tu investigación
+### 4. Una vez abiertos los resultados podrás ver el listado de los archivos donde se encontró el término o frase clave que estabas buscando junto con un pedacito del correo donde se econtró el término. Con esta información podrás encontrar el archivo original en los archivos de origen. Encuéntralo y podrás abrilo en Thunderbird para ver archivo completo, con adjuntos y toda la información que te permita continuar tu investigación
 
 ![look_results.png](https://raw.githubusercontent.com/karisma-klab/mail_explorer_docs/main/images/look_results.png)
 
 ## Necesitas ayuda?
 
-Puedes contactarnos si necesitas ayuda instalando o usando Mail Explorer. escribe un correo a a klab[at]karisma.org.co y cuéntanos que necesitas.
+Puedes contactarnos si necesitas ayuda instalando o usando Mail Explorer. Escribe un correo a klab[at]karisma.org.co y cuéntanos que necesitas.
