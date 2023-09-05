@@ -124,7 +124,7 @@ def summarize_zip_file(zip_filename, src_dir, dst_dir):
                     except:
                         error_log = open("error.log", "a")
                         error_log.write(os.path.join(dst_dir, eml_file))
-                        error_log.wirte("\n")
+                        error_log.write("\n")
                         error_log.close()
                 summarized_file = os.path.join(dst_dir, eml_file[:-4])
                 with open(summarized_file, 'w') as sm:
