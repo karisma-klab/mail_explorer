@@ -119,7 +119,13 @@ def summarize_zip_file(zip_filename, src_dir, dst_dir):
             for eml_file in zip_file.namelist()[1:]:
                 # print(eml_file)
                 with zip_file.open(eml_file) as mail:
-                    summarized_message = summarize_message(mail)
+                    try:
+                        summarized_message = summarize_message(mail)
+                    except:
+                        error_log = open("error.log", "a")
+                        error_log.write(os.path.join(dst_dir, eml_file))
+                        error_log.wirte("\n")
+                        error_log.close()
                 summarized_file = os.path.join(dst_dir, eml_file[:-4])
                 with open(summarized_file, 'w') as sm:
                     sm.write(summarized_message)
