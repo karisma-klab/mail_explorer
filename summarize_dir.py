@@ -2,7 +2,7 @@
 
 from summarizer import *
 
-SRC_DIR = "../sample2/zmb1"
+SRC_DIR = "../sample2"
 DST_DIR = "summarized2"
 
 counter = None
@@ -17,6 +17,14 @@ def get_files(src_dir):
             for name in file_names:
                 files.append(os.path.join(s_dir[src_dir_len:],  name))
     return files
+
+def restore_session(src_dir, dst_dir):
+    session = None
+    # get files completly summarized
+    with open('session') as f:
+        session = f.read().splitlines()
+    # Find files which are not a complete file summarized
+    return [filename for filename in get_files(src_dir) if filename not in session]
 
 
 def init(args, args2, args3):
@@ -72,16 +80,16 @@ def summarize_file_list(files_list, src_dir, dst_dir, threads_num):
 
 def main(src_dir, dst_dir, threads_num):
     start_time = time.time()
-#    if os.path.isfile('session'):
-#        zip_files_list = restore_session(src_dir, dst_dir)
-#    else:
-#        with open('session', 'w'):
-#           print("creating new session file: session")
-    files_list = get_files(src_dir)
+    if os.path.isfile('session'):
+        files_list = restore_session(src_dir, dst_dir)
+    else:
+        with open('session', 'w'):
+           print("creating new session file: session")
+        files_list = get_files(src_dir)
     summarize_file_list(files_list, src_dir, dst_dir, threads_num)
     print("--- %s seconds ---" % (time.time() - start_time))
 
 
 if __name__ == "__main__":
-    main(SRC_DIR, DST_DIR, 1)
+    main(SRC_DIR, DST_DIR, 3)
 
