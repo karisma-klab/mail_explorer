@@ -2,6 +2,8 @@
 
 from summarizer import *
 
+
+# Do not end the file names with a / - it's ugly but works'
 SRC_DIR = "../sample2"
 DST_DIR = "summarized2"
 
