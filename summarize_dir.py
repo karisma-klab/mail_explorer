@@ -50,7 +50,6 @@ def summarize_file(msg_file, src_dir, dst_dir):
         try:
             summarized_message = summarize_message(mail)
         except:
-            raise
             error_log = open("error.log", "a")
             error_log.write(os.path.join(dst_dir, msg_file))
             error_log.write("\n")
